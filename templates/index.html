@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Health &amp; Wellness Companion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Virtual Health &amp; Wellness Companion</h1>
+        </header>
+
+        <section class="wellness-card">
+            <h2>Today's Wellness Tip</h2>
+            <p class="tip">{{ tip }}</p>
+        </section>
+
+        <section class="wellness-card">
+            <h2>Motivational Quote</h2>
+            <p class="quote">{{ quote }}</p>
+        </section>
+
+        <section class="wellness-card">
+            <h2>Diet Tracker</h2>
+            <form id="meal-form">
+                <select name="meal" required>
+                    <option value="">Select Meal Type</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Snack">Snack</option>
+                </select>
+                <textarea name="description" placeholder="What did you eat?" required></textarea>
+                <button type="submit">Add Meal</button>
+            </form>
+
+            <div id="meal-log">
+                <h3>Recent Meals</h3>
+                <div class="meal-entries">
+                    {% for log in diet_logs %}
+                    <div class="meal-entry">
+                        <h4>{{ log.meal }}</h4>
+                        <p>{{ log.description }}</p>
+                        <small>{{ log.date }}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
